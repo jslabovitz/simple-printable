@@ -2,7 +2,7 @@ module Simple
 
   module Printable
 
-    PrintableField = Struct.new('PrintableField', :key, :label, :value)
+    Field = Struct.new('Field', :key, :label, :value)
 
     def printable
       []
@@ -12,6 +12,8 @@ module Simple
       @printable_fields = printable.map do |field|
         key = label = value = nil
         case field
+        when Field
+          next field
         when Symbol
           key = field
         when Array
@@ -22,16 +24,17 @@ module Simple
         when Hash
           key, label, value = field[:key], field[:label], field[:value]
         else
-          raise
+          raise "Unknown field specification: #{field.inspect}"
         end
         label ||= key.to_s.capitalize
         value ||= proc { send(key) }
-        PrintableField.new(key, label, value)
+        Field.new(key, label, value)
       end
       @printable_fields_width = @printable_fields.map { |f| f.label.length }.max
     end
 
     def print(output: STDOUT, indent: 0)
+      output ||= StringIO.new
       make_fields unless @printable_fields
       @printable_fields.each do |field|
         value = field.value.kind_of?(Proc) ? field.value.call(field.key) : field.value
@@ -42,12 +45,20 @@ module Simple
         ]
         if value.kind_of?(Array)
           output.puts
-          value.each { |v| v.print(output: output, indent: indent + 2 + @printable_fields_width) }
+          value.each_with_index do |o, i|
+            output.puts if i > 0
+            o.print(output: output, indent: indent + 2 + @printable_fields_width)
+          end
         else
           output.puts value
         end
       end
-      output.puts
+      if output.kind_of?(StringIO)
+        output.rewind
+        output.read
+      else
+        nil
+      end
     end
 
   end
