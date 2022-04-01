@@ -108,7 +108,9 @@ class Test < MiniTest::Test
         'Y: y',
         'D: ',
         '   D: d',
+        '',
         '   D: d',
+        '',
         '   D: d',
       ]
     }
