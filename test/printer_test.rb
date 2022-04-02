@@ -1,7 +1,7 @@
 require 'minitest/autorun'
 require 'minitest/power_assert'
 
-require 'simple-printable'
+require 'simple-printer'
 
 class Test < MiniTest::Test
 
@@ -10,7 +10,7 @@ class Test < MiniTest::Test
     attr_accessor :x
     attr_accessor :y
 
-    include Simple::Printable
+    include Simple::Printer::Printable
 
     def initialize
       @x = 'x'
@@ -20,7 +20,7 @@ class Test < MiniTest::Test
     def printable
       [
         :x,
-        [:y, 'Y', proc { @y } ],
+        [:y, 'Y', @y],
       ]
     end
 
@@ -37,7 +37,7 @@ class Test < MiniTest::Test
 
     def printable
       super + [
-        Simple::Printable::Field.new(:z, 'Z', proc { @z }),
+        Simple::Printer::Field.new(key: :z, label: 'Z', value: @z),
       ]
     end
 
@@ -47,7 +47,7 @@ class Test < MiniTest::Test
 
     attr_accessor :d
 
-    include Simple::Printable
+    include Simple::Printer::Printable
 
     def initialize
       @d = 'd'
@@ -108,10 +108,21 @@ class Test < MiniTest::Test
         'Y: y',
         'D: ',
         '   D: d',
-        '',
         '   D: d',
-        '',
         '   D: d',
+      ]
+    }
+  end
+
+  def test_standalone
+    output = Simple::Printer.print(
+      ['Foo', 'foo'],
+      ['Bar', 2],
+      output: nil).split("\n")
+    assert {
+      output == [
+        'Foo: foo',
+        'Bar: 2',
       ]
     }
   end

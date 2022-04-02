@@ -1,14 +1,14 @@
 Gem::Specification.new do |s|
-  s.name          = 'simple-printable'
+  s.name          = 'simple-printer'
   s.version       = '0.1'
-  s.summary       = 'Methods to easily print objects'
+  s.summary       = 'Print objects easier'
   s.author        = 'John Labovitz'
   s.email         = 'johnl@johnlabovitz.com'
   s.description   = %q{
-    Simple::Printable adds includable methods to easily print objects.
+    Simple::Printer makes it easier to print objects.
   }.strip
   s.license       = 'MIT'
-  s.homepage      = 'http://github.com/jslabovitz/simple-printable'
+  s.homepage      = 'http://github.com/jslabovitz/simple-printer'
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }

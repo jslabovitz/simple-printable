@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    simple-printable (0.1)
+    simple-printer (0.1)
 
 GEM
   remote: https://rubygems.org/
@@ -21,7 +21,7 @@ DEPENDENCIES
   minitest (~> 5.14)
   minitest-power_assert (~> 0.3)
   rake (~> 13.0)
-  simple-printable!
+  simple-printer!
 
 BUNDLED WITH
    2.3.10
