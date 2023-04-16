@@ -25,7 +25,6 @@ module Simple
         ]
         if field.children
           field.children.each_with_index do |o, i|
-            # output.puts if i > 0
             o.print(output: output, indent: indent + 2 + max_label_width)
           end
         end
