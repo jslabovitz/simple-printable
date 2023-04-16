@@ -66,7 +66,7 @@ module Simple
             raise "Unknown field specification: #{spec.inspect}"
           end
           if field.key
-            field.label ||= field.key.to_s.capitalize
+            field.label ||= field.key.to_s.tr('_', ' ').capitalize
             unless field.value
               raise "No object specified" unless object
               v = object.send(field.key)
