@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name          = 'simple-printer'
-  s.version       = '0.2'
+  s.version       = '0.3'
   s.summary       = 'Print objects easier'
   s.author        = 'John Labovitz'
   s.email         = 'johnl@johnlabovitz.com'
