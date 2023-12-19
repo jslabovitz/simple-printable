@@ -14,14 +14,13 @@ module Simple
 
     def print(output: STDOUT, indent: 0)
       output ||= StringIO.new
-      output.puts
       max_label_width = @fields.map { |f| f.label.length }.max
       @fields.each do |field|
-        output.puts '%s%*s: %s' % [
+        output.puts '%s%*s:%s' % [
           ' ' * indent,
           max_label_width,
           field.label,
-          field.value,
+          field.value.nil? ? '' : " #{field.value}",
         ]
         if field.children
           field.children.each_with_index do |o, i|
