@@ -66,7 +66,7 @@ module Simple
           end
           if field.key
             field.label ||= field.key.to_s.tr('_', ' ').capitalize
-            unless field.value
+            if field.value.nil?
               raise "No object specified" unless object
               v = object.send(field.key)
               if v.kind_of?(Array)
