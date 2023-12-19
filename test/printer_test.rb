@@ -3,7 +3,7 @@ require 'minitest/power_assert'
 
 require 'simple-printer'
 
-class Test < MiniTest::Test
+class Test < Minitest::Test
 
   class A
 
@@ -78,53 +78,49 @@ class Test < MiniTest::Test
 
   def test_simple
     a = A.new
-    output = a.print(output: nil).split("\n")
-    assert {
-      output == [
-        'X: x',
-        'Y: y',
-      ]
-    }
+    output = a.print(output: nil)
+    expected_output = <<~END
+      X: x
+      Y: y
+    END
+    assert { output == expected_output }
   end
 
   def test_inherited
     b = B.new
-    output = b.print(output: nil).split("\n")
-    assert {
-      output == [
-        'X: x',
-        'Y: y',
-        'Z: z',
-      ]
-    }
+    output = b.print(output: nil)
+    expected_output = <<~END
+      X: x
+      Y: y
+      Z: z
+    END
+    assert { output == expected_output }
   end
 
   def test_nested
     c = C.new
-    output = c.print(output: nil).split("\n")
-    assert {
-      output == [
-        'X: x',
-        'Y: y',
-        'D: ',
-        '   D: d',
-        '   D: d',
-        '   D: d',
-      ]
-    }
+    output = c.print(output: nil)
+    expected_output = <<~END
+      X: x
+      Y: y
+      D:
+         D: d
+         D: d
+         D: d
+    END
+    assert { output == expected_output }
   end
 
   def test_standalone
     output = Simple::Printer.print(
       ['Foo', 'foo'],
       ['Bar', 2],
-      output: nil).split("\n")
-    assert {
-      output == [
-        'Foo: foo',
-        'Bar: 2',
-      ]
-    }
+      output: nil)
+    expected_output = <<~END
+      Foo: foo
+      Bar: 2
+    END
+    assert { output == expected_output }
   end
 
 end
