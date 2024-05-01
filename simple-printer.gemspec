@@ -15,8 +15,8 @@ Gem::Specification.new do |s|
   s.require_path  = 'lib'
 
   s.add_development_dependency 'bundler', '~> 2.5'
-  s.add_development_dependency 'minitest', '~> 5.20'
+  s.add_development_dependency 'minitest', '~> 5.22'
   s.add_development_dependency 'minitest-power_assert', '~> 0.3'
-  s.add_development_dependency 'rake', '~> 13.1'
+  s.add_development_dependency 'rake', '~> 13.2'
 
 end
