@@ -105,7 +105,9 @@ class Test < Minitest::Test
       Y: y
       D:
          D: d
+
          D: d
+
          D: d
     END
     assert { output == expected_output }
